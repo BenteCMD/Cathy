@@ -16,15 +16,24 @@ hiddenElements.forEach((el) => observer.observe(el))
 
 
 
-//oog muis laten volgen
+// // logo animatie
 
-var pupil = document.getElementById("pupil")
 
-document.onmousemove = function(eye){
-    var x = eye.clientX * 100 / window.innerWidth + "%" 
-    var y = eye.clientY * 100 / window.innerHeight + "%" 
-  
-    pupil.style.left = x
-    pupil.style.top = y
-    pupil.style.transform = "translate(-"+x+",-"+y+")"
+
+let scrollTrigger = 0
+var logo = document.querySelector('.logo');
+
+function jumpToCorner() {
+
+  if (window.scrollY <= scrollTrigger) {
+    logo.classList.add("remove-shrinkjump")
+    logo.classList.remove("shrinkjump")
+   
+} else if(window.scrollY >= scrollTrigger) {
+  logo.classList.remove("remove-shrinkjump")
+  logo.classList.add("shrinkjump")
 }
+
+}
+
+window.addEventListener("scroll", jumpToCorner)
