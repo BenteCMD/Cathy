@@ -16,24 +16,47 @@ hiddenElements.forEach((el) => observer.observe(el))
 
 
 
-// // logo animatie
 
+// logo animatie
 
-
-let scrollTrigger = 0
 var logo = document.querySelector('.logo');
 
-function jumpToCorner() {
+window.addEventListener('scroll', () => {
+    let value = window.scrollY
 
-  if (window.scrollY <= scrollTrigger) {
-    logo.classList.add("remove-shrinkjump")
-    logo.classList.remove("shrinkjump")
-   
-} else if(window.scrollY >= scrollTrigger) {
-  logo.classList.remove("remove-shrinkjump")
-  logo.classList.add("shrinkjump")
+    logo.style.left = 240 + value * 1.5 + 'px'
+    logo.style.top = 30 + value * 1 + 'px'
+
+    setTimeout(() => {
+        logo.style.transform = "rotate" + "(" + value * .5 + ".1deg" + ")"
+},  150)
+    
+})
+
+// header nav verschijnt
+
+var scrollTrigg = 590
+var nav = document.querySelector("header")
+
+function headerVerschijnt() {
+    if (window.scrollY >= scrollTrigg || window.pageYOffset >= scrollTrigg) { 
+        nav.style.display="block"
+    } else {
+        nav.style.display= "none"
+    }
 }
 
+window.addEventListener("scroll", headerVerschijnt)
+
+
+
+//hamburger menu
+
+var hamburger = document.querySelector("#menu")
+var headernav = document.querySelector("header nav ul")
+
+function toonMenu() {
+    headernav.classList.toggle("toonmenu")
 }
 
-window.addEventListener("scroll", jumpToCorner)
+hamburger.addEventListener("click", toonMenu)
